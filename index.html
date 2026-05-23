@@ -5,62 +5,250 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Loffah</title>
 <meta name="description" content="Security engineer focused on the security of agentic AI systems.">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root { --pico-font-size: 100%; }
-  body { max-width: 42rem; margin: 0 auto; padding: 3rem 1.25rem; }
-  header h1 { margin-bottom: .25rem; }
-  header p.tagline { color: var(--pico-muted-color); margin-top: 0; }
-  section { margin: 2rem 0; }
-  ul { padding-left: 1.25rem; }
-  footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--pico-muted-border-color); color: var(--pico-muted-color); font-size: .9rem; }
-  code { background: var(--pico-code-background-color); padding: 0 .3em; border-radius: 3px; }
-  .wave { display: inline-block; transform-origin: 70% 70%; animation: wave 2.4s infinite; }
+  :root {
+    color-scheme: dark light;
+    --bg: #0a0e1a;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --border: rgba(255, 255, 255, 0.08);
+    --card-bg: rgba(255, 255, 255, 0.02);
+    --card-bg-hover: rgba(255, 255, 255, 0.04);
+    --accent-from: #38bdf8;
+    --accent-to: #a78bfa;
+    --accent-text: #38bdf8;
+    --code-bg: rgba(56, 189, 248, 0.12);
+    --code-text: #7dd3fc;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #fafafa;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: rgba(0, 0, 0, 0.1);
+      --card-bg: rgba(0, 0, 0, 0.02);
+      --card-bg-hover: rgba(0, 0, 0, 0.04);
+      --accent-text: #0284c7;
+      --code-bg: rgba(2, 132, 199, 0.08);
+      --code-text: #0369a1;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 "Space Grotesk", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(at 18% 0%, rgba(56, 189, 248, 0.08) 0px, transparent 50%),
+      radial-gradient(at 82% 100%, rgba(167, 139, 250, 0.07) 0px, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  main {
+    max-width: 52rem;
+    margin: 0 auto;
+    padding: 5rem 1.5rem 3rem;
+  }
+
+  header { margin-bottom: 3rem; }
+
+  h1 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin: 0 0 0.6rem;
+    background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+
+  .tagline {
+    font-size: 1.2rem;
+    color: var(--muted);
+    margin: 0;
+    max-width: 36rem;
+    line-height: 1.5;
+  }
+  .tagline strong { color: var(--text); font-weight: 600; }
+
+  h2 {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin: 3rem 0 1.25rem;
+    font-weight: 500;
+  }
+  h2::before { content: "// "; opacity: 0.5; }
+
+  section p {
+    font-size: 1.02rem;
+    color: var(--text);
+    margin: 0 0 1rem;
+    max-width: 44rem;
+  }
+
+  a {
+    color: var(--accent-text);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  a:hover { border-bottom-color: var(--accent-text); }
+
+  .projects { display: grid; gap: 1rem; }
+
+  .project-card {
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  }
+  .project-card:hover {
+    background: var(--card-bg-hover);
+    border-color: rgba(56, 189, 248, 0.25);
+    transform: translateY(-1px);
+  }
+  .project-card h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.05rem;
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 500;
+  }
+  .project-card h3 a { color: var(--text); }
+  .project-card h3 a:hover { color: var(--accent-text); border-bottom-color: transparent; }
+  .project-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  ul.interests {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  ul.interests li {
+    padding: 0.65rem 0;
+    border-bottom: 1px dashed var(--border);
+    color: var(--muted);
+  }
+  ul.interests li::before {
+    content: "→";
+    color: var(--accent-text);
+    margin-right: 0.8rem;
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 500;
+  }
+  ul.interests li:last-child { border-bottom: none; }
+
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-family: "JetBrains Mono", monospace;
+  }
+  footer a { color: var(--accent-text); }
+
+  code {
+    font-family: "JetBrains Mono", monospace;
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 0.12em 0.45em;
+    border-radius: 4px;
+    font-size: 0.88em;
+    font-weight: 500;
+  }
+
+  .wave {
+    display: inline-block;
+    transform-origin: 70% 70%;
+    animation: wave 2.5s ease-in-out infinite;
+  }
   @keyframes wave {
-    0%,60%,100% { transform: rotate(0); }
-    10% { transform: rotate(14deg); } 20% { transform: rotate(-8deg); }
-    30% { transform: rotate(14deg); } 40% { transform: rotate(-4deg); } 50% { transform: rotate(10deg); }
+    0%, 60%, 100% { transform: rotate(0); }
+    10% { transform: rotate(14deg); }
+    20% { transform: rotate(-8deg); }
+    30% { transform: rotate(14deg); }
+    40% { transform: rotate(-4deg); }
+    50% { transform: rotate(10deg); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  header, section, footer { animation: fadeUp 0.6s ease-out backwards; }
+  header { animation-delay: 0s; }
+  section:nth-of-type(1) { animation-delay: 0.08s; }
+  section:nth-of-type(2) { animation-delay: 0.16s; }
+  section:nth-of-type(3) { animation-delay: 0.24s; }
+  footer { animation-delay: 0.32s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wave, header, section, footer { animation: none; }
   }
 </style>
 </head>
 <body>
 
+<main>
+
 <header>
   <h1>hey <span class="wave">👋</span></h1>
-  <p class="tagline">I'm Loffah — a security engineer focused on the security of agentic AI systems.</p>
+  <p class="tagline">I'm <strong>Loffah</strong> — a security engineer focused on the security of agentic AI systems.</p>
 </header>
 
 <section>
+  <h2>About</h2>
   <p>
     My background is security engineering: substantial blue-team experience and hands-on red-team
-    work. These days I'm focused on the security of agentic AI systems &mdash; prompt injection
-    (direct and indirect), RAG poisoning, tool-call abuse, exfiltration channels, and the
+    work. These days I'm focused on the security of agentic AI &mdash; prompt injection (direct
+    and indirect), RAG poisoning, tool-call abuse, exfiltration channels, and the
     operator-in-the-loop design patterns that keep LLM agents from making high-blast-radius
     mistakes.
   </p>
   <p>
     I play HTB on the
     <a href="https://github.com/botnetbuddies">botnetbuddies</a> team &mdash; ranked
-    <strong>#32 globally</strong> in the latest competitive season. Most of my recent work is in
-    private team repos; the public projects below are what I think are worth sharing.
+    <code>#32 globally</code> in the latest competitive season. Most of my recent work is
+    in private team repos.
   </p>
 </section>
 
 <section>
-  <h2>Public</h2>
-  <ul>
-    <li>
-      <a href="https://github.com/Loffah/rag-poison-lab"><strong>rag-poison-lab</strong></a>
-      &mdash; pentest harness for RAG systems: ingest poisoned documents, run a curated attack
-      corpus, score with canary tokens, report which attack families landed against naive vs
-      hardened configurations.
-    </li>
-  </ul>
+  <h2>Public Work</h2>
+  <div class="projects">
+    <div class="project-card">
+      <h3><a href="https://github.com/Loffah/rag-poison-lab">rag-poison-lab</a></h3>
+      <p>
+        Pentest harness for RAG systems. Ingests poisoned documents, runs a curated attack corpus
+        (direct/indirect prompt injection, markdown exfil, multilingual bypass, tool-call hijack),
+        scores responses with canary tokens, reports which attack families landed against naive
+        vs hardened configurations.
+      </p>
+    </div>
+  </div>
 </section>
 
 <section>
-  <h2>Currently learning / interested in</h2>
-  <ul>
+  <h2>Currently exploring</h2>
+  <ul class="interests">
     <li>Agent evaluation frameworks</li>
     <li>Indirect injection in multi-modal contexts</li>
     <li>Detection patterns for prompt-injection attempts at the proxy / gateway layer</li>
@@ -70,6 +258,8 @@
 <footer>
   <p>Based in Norway · EN/NO · <a href="https://github.com/Loffah">github.com/Loffah</a></p>
 </footer>
+
+</main>
 
 </body>
 </html>
