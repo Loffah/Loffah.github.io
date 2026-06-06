@@ -135,6 +135,10 @@
     font-size: 0.95rem;
     line-height: 1.55;
   }
+  .project-card p.project-links {
+    margin-top: 0.6rem;
+    font-size: 0.9rem;
+  }
 
   ul.interests {
     list-style: none;
@@ -235,12 +239,16 @@
   <h2>Public Work</h2>
   <div class="projects">
     <div class="project-card">
-      <h3><a href="https://github.com/Loffah/rag-poison-lab">rag-poison-lab</a></h3>
+      <h3><a href="https://loffah.github.io/rag-poison-lab/">rag-poison-lab</a></h3>
       <p>
-        Pentest harness for RAG systems. Ingests poisoned documents, runs a curated attack corpus
-        (direct/indirect prompt injection, markdown exfil, multilingual bypass, tool-call hijack),
-        scores responses with canary tokens, reports which attack families landed against naive
-        vs hardened configurations.
+        Pentest harness for RAG systems. Ingests poisoned documents, runs a curated 37-attack corpus
+        across 8 families (direct/indirect prompt injection, markdown exfil, multilingual bypass,
+        hidden text, format spoofing, multi-hop, tool-call hijack), scores responses with canary
+        tokens, and reports which attack families landed against naive vs hardened configurations.
+      </p>
+      <p class="project-links">
+        <a href="https://loffah.github.io/rag-poison-lab/">Docs</a> ·
+        <a href="https://github.com/Loffah/rag-poison-lab">Source</a>
       </p>
     </div>
   </div>
